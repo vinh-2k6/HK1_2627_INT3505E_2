@@ -1,5 +1,65 @@
-### 1. Lấy danh sách bài viết (GET `/api/v1/posts`)
-- **Mô tả:** Trả về danh sách tất cả bài viết hoặc lọc bài viết theo tham số `tag`.
+## 🏗️ 1. Thiết kế Resource & Kiến trúc API
+
+### 📋 Danh sách Resources
+| Resource | Ghi chú |
+| :--- | :--- |
+| **users** | Tài khoản người dùng |
+| **profile** | Hồ sơ, quan hệ 1-1 với user |
+| **posts** | Bài viết, quan hệ N-1 với user |
+| **comments** | Bình luận, quan hệ N-1 với post |
+| **tags** | Thẻ, quan hệ N-N với posts |
+| **follows** | Mô hình hóa thành sub-collection following/followers |
+
+---
+
+### 📂 Phân loại Resources & Đường dẫn
+| Loại | Đường dẫn |
+| :--- | :--- |
+| **Collection** | `/users`, `/posts`, `/tags` |
+| **Item** | `/users/{user_id}`, `/posts/{post_id}`, `/tags/{slug}`, `/comments/{comment_id}` |
+| **Singleton sub-resource** | `/users/{user_id}/profile` |
+| **Sub-collection** | `/posts/{post_id}/comments`, `/posts/{post_id}/tags`, `/users/{user_id}/posts`, `/users/{user_id}/followers`, `/users/{user_id}/following` |
+| **Item của sub-collection** | `/users/{user_id}/following/{target_id}` |
+
+---
+
+### 🌳 Sơ đồ cây Endpoint (`/api/v1`)
+
+```text
+/api/v1
+├── /users
+│   ├── GET, POST
+│   └── /{user_id}
+│       ├── GET, PATCH, DELETE
+│       ├── /profile                GET, PUT
+│       ├── /posts                  GET
+│       ├── /followers              GET
+│       └── /following              GET
+│           └── /{target_id}        PUT (follow), DELETE (unfollow)
+├── /posts
+│   ├── GET, POST
+│   └── /{post_id}
+│       ├── GET, PUT, PATCH, DELETE
+│       ├── /comments               GET, POST
+│       └── /tags                   GET
+│           └── /{slug}             PUT (attach), DELETE (detach)
+├── /comments
+│   └── /{comment_id}               GET, PATCH, DELETE
+└── /tags
+    ├── GET
+    └── /{slug}
+        ├── GET
+        └── /posts                  GET
+```
+
+---
+
+## 📌 2. Triển khai Mã nguồn Endpoints (`/posts`)
+
+Dưới đây là mã nguồn Flask tương ứng với các thao tác CRUD trên tập tài nguyên `/posts`:
+
+### 2.1. Lấy danh sách bài viết (GET `/api/v1/posts`)
+- **Mô tả:** Trả về danh sách bài viết trong hệ thống, hỗ trợ lọc theo tham số `tag`.
 - **Mã nguồn triển khai:**
 
 ```python
@@ -15,8 +75,8 @@ def get_posts():
 
 ---
 
-### 2. Tạo bài viết mới (POST `/api/v1/posts`)
-- **Mô tả:** Nhận dữ liệu JSON gồm `title`, `content`, `author_id`, `tags` để thêm bài viết mới vào hệ thống.
+### 2.2. Tạo bài viết mới (POST `/api/v1/posts`)
+- **Mô tả:** Thêm bài viết mới vào collection `/posts`.
 - **Mã nguồn triển khai:**
 
 ```python
@@ -40,8 +100,8 @@ def create_post():
 
 ---
 
-### 3. Lấy thông tin chi tiết bài viết (GET `/api/v1/posts/<post_id>`)
-- **Mô tả:** Tìm và trả về chi tiết 1 bài viết dựa theo `post_id`.
+### 2.3. Lấy thông tin chi tiết bài viết (GET `/api/v1/posts/<post_id>`)
+- **Mô tả:** Lấy thông tin chi tiết của một bài viết cụ thể theo `post_id`.
 - **Mã nguồn triển khai:**
 
 ```python
@@ -55,8 +115,8 @@ def get_post(post_id):
 
 ---
 
-### 4. Cập nhật bài viết (PUT `/api/v1/posts/<post_id>`)
-- **Mô tả:** Cập nhật thông tin bài viết (`title`, `content`, `tags`) dựa theo `post_id`.
+### 2.4. Cập nhật bài viết (PUT `/api/v1/posts/<post_id>`)
+- **Mô tả:** Cập nhật thông tin tiêu đề, nội dung hoặc tags của bài viết.
 - **Mã nguồn triển khai:**
 
 ```python
@@ -79,8 +139,8 @@ def update_post(post_id):
 
 ---
 
-### 5. Xóa bài viết (DELETE `/api/v1/posts/<post_id>`)
-- **Mô tả:** Xóa một bài viết ra khỏi cơ sở dữ liệu dựa theo `post_id`.
+### 2.5. Xóa bài viết (DELETE `/api/v1/posts/<post_id>`)
+- **Mô tả:** Xóa một bài viết cụ thể ra khỏi hệ thống.
 - **Mã nguồn triển khai:**
 
 ```python
