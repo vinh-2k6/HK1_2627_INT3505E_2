@@ -1,0 +1,91 @@
+openapi: 3.0.3
+info:
+  title: Tasks Management API
+  version: 1.0.0
+  description: API quản lý công việc hàng ngày cho bài tập nhóm.
+
+servers:
+  - url: http://127.0.0.1:5000
+    description: Local Flask Development Server
+
+paths:
+  /tasks:
+    get:
+      summary: Lấy danh sách tất cả công việc
+      responses:
+        '200':
+          description: Thành công
+          content:
+            application/json:
+              example:
+                - id: 1
+                  title: "Làm bài tập Flask"
+                  completed: false
+
+    post:
+      summary: Tạo một công việc mới
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - title
+              properties:
+                title:
+                  type: string
+                  example: "Nộp bài tập OpenAPI"
+      responses:
+        '201':
+          description: Đã tạo thành công
+
+  /tasks/{id}:
+    get:
+      summary: Lấy thông tin chi tiết một công việc theo ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Thành công
+        '404':
+          description: Không tìm thấy công việc
+
+    put:
+      summary: Cập nhật thông tin công việc theo ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                completed:
+                  type: boolean
+      responses:
+        '200':
+          description: Cập nhật thành công
+
+    delete:
+      summary: Xóa một công việc theo ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Xóa thành công
