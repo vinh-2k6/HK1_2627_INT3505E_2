@@ -62,4 +62,4 @@ Dưới đây là hình ảnh cấu trúc và các request trong Postman Collect
   ![List Books (Filter & Multi-sort)](images/image_d61339.png)
 
 - **Create New Book:**
-  ![Create New Book](images/image_d61339f.png)
+  ![Create New Book](images/image_d61339.png)
