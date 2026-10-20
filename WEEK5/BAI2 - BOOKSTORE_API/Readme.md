@@ -47,19 +47,19 @@ File collection được lưu tại:
 Dưới đây là hình ảnh cấu trúc và các request trong Postman Collection:
 
 - **Tổng quan Postman Collection & List Books (Default):**
-  ![Postman Collection Overview](/images/image_d616df.jpg)
+  ![Postman Collection Overview](/images/image_d616df.png)
 
 - **List Books (Offset Pagination):**
-  ![List Books (Offset Pagination)](/images/image_d612de.jpg)
+  ![List Books (Offset Pagination)](/images/image_d612de.png)
 
 - **List Books (Cursor Pagination):**
-  ![List Books (Cursor Pagination)](/images/image_d61300.jpg)
+  ![List Books (Cursor Pagination)](/images/image_d61300.png)
 
 - **List Books (Cursor & Limit):**
-  ![List Books (Cursor & Limit)](/images/image_d6131c.jpg)
+  ![List Books (Cursor & Limit)](/images/image_d6131c.png)
 
 - **List Books (Filter & Multi-sort):**
-  ![List Books (Filter & Multi-sort)](/images/image_d61339.jpg)
+  ![List Books (Filter & Multi-sort)](/images/image_d61339.png)
 
 - **Create New Book:**
-  ![Create New Book](/images/image_d6133f.jpg)
+  ![Create New Book](/images/image_d6133f.png)
