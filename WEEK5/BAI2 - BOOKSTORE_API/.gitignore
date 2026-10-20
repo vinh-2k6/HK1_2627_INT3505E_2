@@ -1,0 +1,26 @@
+# Python bytecode và cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Thư mục môi trường ảo
+venv/
+env/
+ENV/
+
+# Cơ sở dữ liệu SQLite cục bộ và thư mục instance của Flask
+instance/
+*.db
+*.sqlite
+*.sqlite3
+
+# Thư mục test cache
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Cấu hình IDE (VS Code, PyCharm)
+.vscode/
+.idea/
+*.swp
+*.spt

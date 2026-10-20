@@ -1,0 +1,29 @@
+{
+  "info": {
+    "name": "Lab 1 Bookstore API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "List Books (Offset)",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:5000/api/v1/books?strategy=offset&limit=10&page=1"
+      }
+    },
+    {
+      "name": "List Books (Cursor)",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:5000/api/v1/books?strategy=cursor&limit=10"
+      }
+    },
+    {
+      "name": "Filter by Genre & Multi-sort",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:5000/api/v1/books?genre=fiction&sort=-price_vnd,title"
+      }
+    }
+  ]
+}

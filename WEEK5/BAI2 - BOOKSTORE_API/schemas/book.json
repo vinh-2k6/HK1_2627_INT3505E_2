@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "title": { "type": "string", "minLength": 1 },
+    "isbn": { "type": "string", "minLength": 10 },
+    "price_vnd": { "type": "number", "minimum": 0 },
+    "stock": { "type": "integer", "minimum": 0 },
+    "category_id": { "type": "integer" },
+    "author_ids": {
+      "type": "array",
+      "items": { "type": "integer" }
+    }
+  },
+  "required": ["title", "isbn", "price_vnd", "category_id"]
+}

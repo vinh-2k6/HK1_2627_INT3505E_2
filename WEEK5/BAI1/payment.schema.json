@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Payment",
+  "type": "object",
+  "properties": {
+    "payment_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "booking_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "amount": {
+      "type": "number",
+      "minimum": 0
+    },
+    "payment_method": {
+      "type": "string",
+      "enum": ["CREDIT_CARD", "MOMO", "PAYPAL", "BANK_TRANSFER"]
+    },
+    "status": {
+      "type": "string",
+      "enum": ["PENDING", "SUCCESS", "FAILED"]
+    },
+    "transaction_date": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": ["payment_id", "booking_id", "amount", "payment_method", "status"]
+}
