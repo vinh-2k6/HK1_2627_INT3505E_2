@@ -42,24 +42,24 @@ Dấu `-` trước tên trường biểu thị thứ tự giảm dần. Ví dụ
 
 ## 4. Postman collection
 File collection được lưu tại:
-`postman/bookstore-api.postman_collection.json`
+`postman/Bookstore_API.postman_collection.json`
 
 Dưới đây là hình ảnh cấu trúc và các request trong Postman Collection:
 
 - **Tổng quan Postman Collection & List Books (Default):**
-  ![Postman Collection Overview](/images/image_d616df.png)
+  ![Postman Collection Overview](images/image_d616df.png)
 
 - **List Books (Offset Pagination):**
-  ![List Books (Offset Pagination)](/images/image_d612de.png)
+  ![List Books (Offset Pagination)](images/image_d612de.png)
 
 - **List Books (Cursor Pagination):**
-  ![List Books (Cursor Pagination)](/images/image_d61300.png)
+  ![List Books (Cursor Pagination)](images/image_d61300.png)
 
 - **List Books (Cursor & Limit):**
-  ![List Books (Cursor & Limit)](/images/image_d6131c.png)
+  ![List Books (Cursor & Limit)](images/image_d6131c.png)
 
 - **List Books (Filter & Multi-sort):**
-  ![List Books (Filter & Multi-sort)](/images/image_d61339.png)
+  ![List Books (Filter & Multi-sort)](images/image_d61339.png)
 
 - **Create New Book:**
-  ![Create New Book](/images/image_d6133f.png)
+  ![Create New Book](images/image_d6133f.png)
