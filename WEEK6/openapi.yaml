@@ -1,0 +1,153 @@
+openapi: 3.0.3
+info:
+  title: Social Network API
+  version: 1.0.0
+  description: API specification cho hệ thống Social Network bao gồm xác thực và bài viết.
+
+servers:
+  - url: https://api.socialnetwork.local/v1
+
+paths:
+  /auth/login:
+    post:
+      summary: Đăng nhập hệ thống
+      description: Xác thực người dùng bằng thông tin đăng nhập (username/password) để nhận Access Token và Refresh Token.
+      operationId: loginUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - username
+                - password
+              properties:
+                username:
+                  type: string
+                  example: "nguyen_van_a"
+                password:
+                  type: string
+                  format: password
+                  example: "Str0ngP@ssw0rd!"
+      responses:
+        '200':
+          description: Đăng nhập thành công, trả về token xác thực.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accessToken:
+                    type: string
+                    example: "eyJhbGciOiJIUzI1Ni..."
+                  refreshToken:
+                    type: string
+                    example: "dGhpcy1pcy1hLXJlZnJlc2g..."
+        '400':
+          description: Lỗi dữ liệu đầu vào (Thiếu trường bắt buộc hoặc sai định dạng).
+        '401':
+          description: Lỗi xác thực (Sai tên đăng nhập hoặc mật khẩu).
+        '429':
+          description: Lỗi quá giới hạn (Quá nhiều lần thử đăng nhập sai, bị chặn tạm thời).
+        '500':
+          description: Lỗi máy chủ nội bộ.
+
+  /auth/refresh:
+    post:
+      summary: Làm mới Access Token
+      description: Sử dụng Refresh Token hợp lệ để cấp một Access Token mới mà không cần đăng nhập lại.
+      operationId: refreshAccessToken
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - refreshToken
+              properties:
+                refreshToken:
+                  type: string
+                  example: "dGhpcy1pcy1hLXJlZnJlc2g..."
+      responses:
+        '200':
+          description: Làm mới token thành công.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accessToken:
+                    type: string
+                    example: "eyJhbGciOiJIUzI1Ni..."
+        '400':
+          description: Thiếu Refresh Token trong yêu cầu.
+        '401':
+          description: Lỗi xác thực (Refresh Token không hợp lệ, đã hết hạn hoặc bị thu hồi).
+        '403':
+          description: Token hợp lệ nhưng tài khoản đã bị khóa hoặc vô hiệu hóa quyền.
+        '500':
+          description: Lỗi máy chủ nội bộ.
+
+  /posts/{id}:
+    get:
+      summary: Lấy chi tiết bài viết
+      description: Trả về thông tin chi tiết của một bài viết dựa vào ID định danh.
+      operationId: getPostById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID của bài viết cần xem
+          schema:
+            type: integer
+            example: 12345
+      security:
+        - OAuth2:
+            - read:posts
+      responses:
+        '200':
+          description: Lấy thông tin bài viết thành công.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 12345
+                  title:
+                    type: string
+                    example: "Học lập trình API an toàn"
+                  content:
+                    type: string
+                    example: "Nội dung chi tiết của bài viết..."
+                  authorId:
+                    type: integer
+                    example: 987
+                  createdAt:
+                    type: string
+                    format: date-time
+        '400':
+          description: ID bài viết không đúng định dạng (ví dụ truyền chuỗi thay vì số nguyên).
+        '401':
+          description: Chưa cung cấp Token hoặc Token không hợp lệ/hết hạn.
+        '403':
+          description: Không đủ quyền truy cập (thiếu scope `read:posts` hoặc bài viết ở trạng thái riêng tư/bị khóa).
+        '404':
+          description: Không tìm thấy bài viết với ID tương ứng.
+        '500':
+          description: Lỗi máy chủ nội bộ.
+
+components:
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://api.socialnetwork.local/oauth/authorize
+          tokenUrl: https://api.socialnetwork.local/oauth/token
+          scopes:
+            read:posts: Đọc và xem nội dung bài viết
+            write:posts: Tạo và chỉnh sửa bài viết
