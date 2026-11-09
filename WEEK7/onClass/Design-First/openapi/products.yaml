@@ -1,0 +1,78 @@
+openapi: 3.0.3
+
+info:
+  title: Product API
+  description: Product API - Design First Demo
+  version: 1.0.0
+
+paths:
+  /products:
+    get:
+      operationId: api.products.list_products
+      summary: Get all products
+      description: Retrieve all products
+      responses:
+        "200":
+          description: List of products
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Product"
+
+    post:
+      operationId: api.products.create_product
+      summary: Create a product
+      description: Create a new product
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProductInput"
+      responses:
+        "201":
+          description: Product created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+
+        "400":
+          description: Invalid request
+
+components:
+  schemas:
+    ProductInput:
+      type: object
+      required:
+        - name
+        - price
+      properties:
+        name:
+          type: string
+          example: Keyboard
+        price:
+          type: number
+          format: float
+          minimum: 0
+          example: 50
+
+    Product:
+      type: object
+      required:
+        - id
+        - name
+        - price
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: Laptop
+        price:
+          type: number
+          format: float
+          example: 1500
