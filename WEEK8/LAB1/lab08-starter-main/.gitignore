@@ -1,0 +1,22 @@
+# Môi trường ảo Python
+.env/
+venv/
+ENV/
+
+# Cache của Python và Pytest
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Thư mục cấu hình của VS Code
+.vscode/
+
+# Thư mục báo cáo test hoặc hiệu năng (nếu có sinh ra file log/report động)
+reports/
+performance/*.html
+performance/*.json
+
+# Hệ điều hành
+.DS_Store
+Thumbs.db
