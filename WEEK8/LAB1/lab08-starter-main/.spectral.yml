@@ -1,0 +1,9 @@
+extends: ["spectral:oas"]
+rules:
+  response-200-has-properties:
+    description: "Response với status 200 phải có ít nhất 1 trường (property) được định nghĩa trong schema."
+    severity: warn
+    given: "$.paths[*][*].responses['200'].content['application/json'].schema"
+    then:
+      field: properties
+      function: truthy
