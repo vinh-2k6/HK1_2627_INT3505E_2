@@ -38,3 +38,7 @@ c:/Users/OS/Documents/GitHub/HK1_2627_INT3505E_2/WEEK8/LAB1/lab08-starter-main/o
   90:12  warning  operation-tags             Operation must have non-empty "tags" array.                              paths./books/{id}.delete
 
 ✖ 14 problems (0 errors, 14 warnings, 0 infos, 0 hints)
+
+## Lab: 3
+### Bài A
+![alt text](image-1.png)
