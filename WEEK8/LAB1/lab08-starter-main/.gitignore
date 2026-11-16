@@ -13,7 +13,6 @@ __pycache__/
 .vscode/
 
 # Thư mục báo cáo test hoặc hiệu năng (nếu có sinh ra file log/report động)
-reports/
 performance/*.html
 performance/*.json
 
