@@ -44,3 +44,7 @@ c:/Users/OS/Documents/GitHub/HK1_2627_INT3505E_2/WEEK8/LAB1/lab08-starter-main/o
 
 ### Bài A
 ![alt text](image-1.png)
+
+### Bài B
+![alt text](image-2.png)
+![alt text](image-3.png)

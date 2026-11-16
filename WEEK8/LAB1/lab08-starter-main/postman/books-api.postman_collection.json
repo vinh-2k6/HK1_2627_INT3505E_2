@@ -249,7 +249,8 @@
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "pm.test(\"404 Not Found\", () => pm.response.to.have.status(404));"
+                  "pm.test(\"404 Not Found\", () => pm.response.to.have.status(404));",
+                  "pm.test(\"error body present\", () => pm.expect(pm.response.text()).to.be.a(\"string\"));"
                 ]
               }
             }
