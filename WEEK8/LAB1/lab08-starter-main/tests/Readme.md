@@ -22,3 +22,6 @@ Dưới đây là mô tả chi tiết về 4 bài kiểm thử chính trong `tes
 4. **`test_delete_then_get_book`**[cite: 6, 7]
    * **Mô tả:** Kiểm thử kịch bản xóa một cuốn sách theo ID, sau đó thực hiện gọi `GET` lại chính ID đó[cite: 6].
    * **Kết quả kỳ vọng:** Cuốn sách sau khi đã xóa thành công sẽ không còn tồn tại, yêu cầu `GET` tiếp theo phải trả về mã `404`[cite: 6].
+
+* Bài 2 LAB 01 *
+![alt text](image-1.png)
