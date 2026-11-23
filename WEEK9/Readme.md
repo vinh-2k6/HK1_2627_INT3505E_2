@@ -1,6 +1,0 @@
-## Lab1
-
-![alt text](image-1.png)
-
-## Lab2
-![alt text](image-2.png)
