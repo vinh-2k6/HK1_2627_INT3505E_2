@@ -101,10 +101,4 @@ curl.exe -i -X POST -H "Content-Type: application/json" -d '{\"account_id\":\"ac
 | **Case 2 (Allow-list)** | `acct_42` | `201 CREATED` | `v2` | Đạt (ưu tiên tầng 2) |
 | **Case 3 (Hash Bucket 5%)** | `acct_normal_1` | `200 OK` | `v1` | Đạt (ưu tiên tầng 3) |
 
-### Ảnh chụp minh họa
-> *(Thay đường dẫn bên dưới bằng tên file ảnh thực tế trong repo của bạn)*
->
-> ![Test Case 1 & 2 - Cohort và Allow-list](./images/test_cohort_allowlist.png)
-> ![Test Case 2 & 3 - Allow-list và Hash Bucket](./images/test_allowlist_bucket.png)
 
----
